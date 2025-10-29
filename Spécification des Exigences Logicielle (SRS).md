@@ -93,7 +93,7 @@ Système autonome avec base de données et API REST.
 ## 4. Diagrammes UML
 - Diagramme de [[Cas d'utilisations]]
 - Diagrammes de séquence (scénario d’échange).
-- Diagramme de classes (objets principaux : [[Classes - Client]], [[Classes - Serveur]]).
+- Diagramme de classes (objets principaux : [[Diagramme Classes - Client]], [[Diagrammes Classes - Serveur]]).
 - Diagrammes d’activité (workflow : créer annonce, gérer demande, etc.).
 
 ---

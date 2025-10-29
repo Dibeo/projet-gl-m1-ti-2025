@@ -15,7 +15,7 @@
               "state": {
                 "file": "SRS/Functionnement.canvas",
                 "viewState": {
-                  "x": 143.97025862068966,
+                  "x": 1003.4185344827592,
                   "y": -270.37155172413793,
                   "zoom": -1.5300362902175628
                 }
@@ -42,14 +42,17 @@
             "id": "b66c833703ebb6bf",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -208,12 +211,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "8caebac3fa2a0409",
+  "active": "daa6478314b7bb3e",
   "lastOpenFiles": [
-    "SRS/Functionnement.canvas",
     "Spécification des Exigences Logicielle (SRS).md",
-    "UML/Classes - Serveur.md",
-    "UML/Classes - Client.md",
+    "README.md",
+    "UML/Diagrammes Classes - Serveur.md",
+    "UML/Diagramme Classes - Client.md",
+    "SRS/Functionnement.canvas",
     "UML/Cas d'utilisations.md",
     "SRS",
     "UML/Cas d'utilisations.png",

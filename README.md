@@ -43,19 +43,9 @@ Documentation/UML contient :
 - Le diagramme de classe coté client (versions light et détaillée).
 
 ---
-## Prochaines étapes
-1. Définir les spécifications détaillées de chaque microservice (API, schémas de données, événements).  
-2. Mettre en place un environnement de développement (Docker).  
-3. Implémenter le Client (React Native, Angular).  
-4. Implémenter le Serveur (Spring Boot, NestJS, ou Django).  
-5. Intégrer un pipeline CI/CD pour les déploiements.  
-6. Ajouter des tests unitaires et d’intégration.  
-
----
 
 ## Documentation
-Toute la documentation initiale se trouve dans le dossier [`Documentation`](./Documentation).  
-Elle contient :  
+La doc (ouvrable avec Obsidian) contient :  
 - Les schémas Canvas (Obsidian),  
 - Les schémas UML,
 - Les besoins fonctionnels,  
