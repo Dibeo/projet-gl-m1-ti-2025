@@ -1,0 +1,28 @@
+{
+	"nodes":[
+		{"id":"gateway","type":"text","text":"## API Gateway\n\n**Rôle** : Point d’entrée unique\n\n**Besoins** :\n- Routage vers microservices\n- Authentification globale\n- Rate limiting\n- Monitoring","x":0,"y":-440,"width":350,"height":380},
+		{"id":"ms_echanges","type":"text","text":"## Microservice Échanges\n- API Échanges\n- Service Gestion demandes\n- Modèle Echange\n- DB dédiée\n\n**Besoins** :\n- Gestion workflow demandes\n- Transactionnalité\n- Journalisation des actions\n- Support temps réel via Events","x":650,"y":-200,"width":513,"height":400},
+		{"id":"ms_annonces","type":"text","text":"## Microservice Annonces\n- API Annonces\n- Service Métier Annonces\n- Modèle Annonce\n- DB dédiée (NoSQL possible)\n\n**Besoins** :\n- Publication et recherche d’annonces\n- Indexation recherche\n- Support filtres avancés\n- Gestion statuts","x":650,"y":-640,"width":513,"height":360},
+		{"id":"ms_users","type":"text","text":"## Microservice Utilisateurs\n- API Utilisateurs\n- Service Authentification\n- Modèle Utilisateur\n- DB dédiée (SQL)\n\n**Besoins** :\n- Gestion profils et rôles\n- Sécurité (JWT/OAuth2)\n- CRUD complet utilisateur\n- Isolation stricte de la DB","x":650,"y":-1160,"width":513,"height":440},
+		{"id":"ms_notifs","type":"text","text":"## Microservice Notifications\n- API Notifications\n- Service Push\n- Modèle Notification\n- DB dédiée (clé/valeur)\n\n**Besoins** :\n- Envoi notifications temps réel\n- Multicanal (mail, SMS, in-app)\n- File d’attente (Kafka/RabbitMQ)","x":650,"y":280,"width":513,"height":350},
+		{"id":"infra_srv","type":"text","text":"## Infrastructure transversale\n- Service Discovery (Eureka/Consul)\n- Config Server\n- Logging/Monitoring (ELK, Prometheus)\n- Gateway + API Management\n\n**Besoins** :\n- Scalabilité horizontale\n- Observabilité\n- Centralisation des logs\n- Résilience réseau","x":1520,"y":-502,"width":350,"height":505},
+		{"id":"infra","type":"text","text":"## Infrastructure (API)\n- ApiClient\n- WebSocketClient\n\n**Besoins** :\n- Abstraction des appels REST\n- Reconnexion auto\n- Sécurité HTTPS\n- Temps réel (messagerie)","x":-555,"y":-412,"width":395,"height":325},
+		{"id":"domaine","type":"text","text":"## Domaine (Modèles)\n- Utilisateur\n- Annonce\n- Competence\n- Echange\n- Notification\n\n**Besoins** :\n- Sérialisation JSON\n- Cohérence des données\n- Évolution facile","x":-1080,"y":20,"width":470,"height":380},
+		{"id":"services","type":"text","text":"## Services (Application)\n- AnnonceService\n- ProfilService\n- EchangeService\n- NotificationService\n\n**Besoins** :\n- Logique client centralisée\n- Caching local\n- Validation avant envoi API","x":-1480,"y":-426,"width":480,"height":353},
+		{"id":"ui","type":"text","text":"## UI (Présentation)\n- PageAccueil\n- PageAnnonce\n- PageProfil\n\n**Besoins** :\n- Navigation fluide\n- Responsive + Accessibilité\n- Affichage clair des données","x":-1040,"y":-880,"width":485,"height":360}
+	],
+	"edges":[
+		{"id":"4a550b3d7966fe00","fromNode":"gateway","fromSide":"right","toNode":"ms_annonces","toSide":"left"},
+		{"id":"7a9186425ee32010","fromNode":"gateway","fromSide":"right","toNode":"ms_echanges","toSide":"left"},
+		{"id":"68a327bc447fd660","fromNode":"gateway","fromSide":"right","toNode":"ms_notifs","toSide":"left"},
+		{"id":"23da63032c2b539e","fromNode":"ms_notifs","fromSide":"right","toNode":"infra_srv","toSide":"left"},
+		{"id":"ba6488084d6fe346","fromNode":"ms_echanges","fromSide":"right","toNode":"infra_srv","toSide":"left"},
+		{"id":"fbbe72583df62f42","fromNode":"ms_annonces","fromSide":"right","toNode":"infra_srv","toSide":"left"},
+		{"id":"20b05837e3dd4f8f","fromNode":"ms_users","fromSide":"right","toNode":"infra_srv","toSide":"left"},
+		{"id":"8225542c6ec923cc","fromNode":"gateway","fromSide":"right","toNode":"ms_users","toSide":"left"},
+		{"id":"5479166434fb4c1d","fromNode":"infra","fromSide":"right","toNode":"gateway","toSide":"left"},
+		{"id":"5becfd55544c96bd","fromNode":"domaine","fromSide":"right","toNode":"infra","toSide":"bottom"},
+		{"id":"164639e04ca5c885","fromNode":"services","fromSide":"bottom","toNode":"domaine","toSide":"left"},
+		{"id":"59cfe3f4d9662209","fromNode":"ui","fromSide":"left","toNode":"services","toSide":"top"}
+	]
+}
