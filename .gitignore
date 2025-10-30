@@ -36,4 +36,4 @@ Serveur/build/
 .DS_Store
 
 ### Obsidian ###
-#SDLC/.obsidian
+.obsidian
