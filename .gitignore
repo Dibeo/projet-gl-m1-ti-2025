@@ -1,0 +1,39 @@
+Serveur/target/
+Serveur/!.mvn/wrapper/maven-wrapper.jar
+Serveur/!**/src/main/**/target/
+Serveur/!**/src/test/**/target/
+Serveur/.kotlin
+
+### IntelliJ IDEA ###
+Serveur/.idea/
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+Serveur/.apt_generated
+Serveur/.classpath
+Serveur/.factorypath
+Serveur/.project
+Serveur/.settings
+Serveur/.springBeans
+Serveur/.sts4-cache
+
+### NetBeans ###
+Serveur/nbproject/private/
+Serveur/nbbuild/
+Serveur/dist/
+Serveur/nbdist/
+Serveur/.nb-gradle/
+Serveur/build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+### Obsidian ###
+#SDLC/.obsidian
