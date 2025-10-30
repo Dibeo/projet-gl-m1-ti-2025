@@ -46,7 +46,7 @@ Système autonome avec base de données et API REST.
 - **Administrateur** : Responsable de la modération et gestion du système.
 
 ### 2.4 Contraintes
-- Adresse confidentiel.
+- Adresses confidentielles.
 - Mot de passe stocké avec hashage sécurisé.
 - Compatible navigateurs modernes.
 
@@ -78,8 +78,8 @@ Système autonome avec base de données et API REST.
 - **Compatibilité** : Fonctionne sur mobile et desktop (CSS responsive).
 - **Convivialité** : 
 	- Interface intuitive avec filtres de recherche.
-	- Graphes d'activités (ChartJS)
-	- Pop up durant l'utilisation du site (Solid-Toast)
+	- Graphiques d'activités (ChartJS)
+	- Pop-up durant l'utilisation du site (Solid-Toast)
 	- Admin Panel (GridStackJS)
 
 ### 3.3 Interfaces
@@ -93,7 +93,7 @@ Système autonome avec base de données et API REST.
 ## 4. Diagrammes UML
 - Diagramme de [[Cas d'utilisations]]
 - Diagrammes de séquence (scénario d’échange).
-- Diagramme de classes (objets principaux : [[Diagramme Classes - Client]], [[Diagrammes Classes - Serveur]]).
+- Diagramme de classes (objets principaux : [[Diagrammes Classes - Client]], [[Diagrammes Classes - Serveur]]).
 - Diagrammes d’activité (workflow : créer annonce, gérer demande, etc.).
 
 ---

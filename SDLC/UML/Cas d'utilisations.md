@@ -50,12 +50,17 @@ rectangle "Application d'échange local" {
     Utilisateur -- (S'inscrire)
     Utilisateur -- (Se connecter)
     Utilisateur -- (Gérer son profil)
+    Utilisateur -- (Supprimer son compte)
+    Utilisateur -- (Réinitialiser son mot de passe)
   }
 
   package "Annonces" {
     Utilisateur -- (Créer une annonce d'objet)
     Utilisateur -- (Parcourir/Rechercher des annonces)
     Utilisateur -- (Voir détails d'une annonce)
+    Utilisateur -- (Consulter le profil d'un autre utilisateur)
+    Utilisateur -- (Modifier/Supprimer une annonce)
+    Utilisateur -- (Signaler une annonce ou un utilisateur)
   }
 
   package "Compétences" {
@@ -81,6 +86,7 @@ rectangle "Application d'échange local" {
     Admin -- (Gérer les utilisateurs)
     Admin -- (Modérer les annonces)
     Admin -- (Superviser le système)
+    Admin -- (Traiter un signalement)
   }
 }
 
@@ -91,7 +97,17 @@ rectangle "Application d'échange local" {
   (Gérer les demandes) .> (Envoyer une demande d'échange) : <<include>>
   (Messagerie) ..> (Gérer les demandes) : <<include>>
   (Donner un avis et une note) ..> (Gérer les demandes) : <<include>>
-  (Recevoir des notifications) ..> (Gérer les demandes) : <<include>>
+  (Recevoir des notifications) ..> (Gérer les demandes) : <<extend>>
+  (Voir détails d'une annonce) ..> (Consulter le profil d'un autre utilisateur) : <<include>>
+  (Créer une annonce d'objet) ..> (Modifier/Supprimer une annonce) : <<extend>>
+  (Créer une annonce d'objet) <|-- (Proposer une compétence)
+  (Parcourir/Rechercher des annonces) <|-- (Parcourir compétences)
+  (Gérer son profil) .> (Supprimer son compte) : <<extend>>
+  (Signaler une annonce ou un utilisateur) ..> (Traiter un signalement) : <<include>>
+  (Réinitialiser son mot de passe) ..> (Se connecter) : <<extend>>
+  (Recevoir des notifications) .> (Envoyer une demande d'échange) : <<extend>>
+  (Recevoir des notifications) .> (Messagerie) : <<extend>>
+  (Recevoir des notifications) .> (Donner un avis et une note) : <<extend>>
 
 
 @enduml
