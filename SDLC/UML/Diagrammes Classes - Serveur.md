@@ -4,64 +4,68 @@ ___
 skinparam packageStyle rectangle
 skinparam componentStyle rectangle
 
-' === API Gateway ===
-package "API Gateway" {
-  class Gateway
+package "Application Monolithe" {
+
+  class Serveur {
+  }
+
+  class Utilisateur {
+  }
+
+  class Annonce {
+  }
+
+  enum AnnonceType {
+    Objet
+    Competence
+  }
+
+  class DemandeEchange {
+  }
+
+  enum StatutDemande {
+    EnAttente
+    Acceptee
+    Refusee
+  }
+
+  class Message {
+  }
+
+  class Notification {
+  }
+
+  enum NotificationType {
+    NouvelleDemande
+    NouveauMessage
+    MiseAJourStatut
+    NouvelAvis
+  }
+
+  class DB <<database>> {
+  }
+
+  Utilisateur "1" -- "0..*" Annonce
+  Annonce "1" -- "0..*" DemandeEchange : "cible"
+  Utilisateur "1" -- "0..*" DemandeEchange : "initie"
+  DemandeEchange "1" -- "0..*" Message
+  Utilisateur "1" -- "0..*" Notification
+
+  Serveur ..> Utilisateur
+  Serveur ..> Annonce
+  Serveur ..> DemandeEchange
+  Serveur ..> Message
+  Serveur ..> Notification
+
+  Utilisateur .. DB
+  Annonce .. DB
+  DemandeEchange .. DB
+  Message .. DB
+  Notification .. DB
 }
-
-' === Microservice Utilisateurs ===
-package "Microservice Utilisateurs" {
-  class Utilisateur
-  class AuthService
-  Utilisateur -- AuthService
-}
-
-' === Microservice Annonces ===
-package "Microservice Annonces" {
-  class Annonce
-  class AnnonceService
-  Utilisateur -- Annonce
-  AnnonceService ..> Annonce
-}
-
-' === Microservice Échanges ===
-package "Microservice Échanges" {
-  class DemandeEchange
-  class Message
-  class EchangeService
-  Annonce -- DemandeEchange
-  Utilisateur -- DemandeEchange
-  DemandeEchange -- Message
-  EchangeService ..> DemandeEchange
-}
-
-' === Microservice Notifications ===
-package "Microservice Notifications" {
-  class Notification
-  class NotificationService
-  Utilisateur -- Notification
-  NotificationService ..> Notification
-}
-
-' === Infrastructure ===
-package "Infrastructure" {
-  class ConfigServer
-  class ServiceDiscovery
-  class Monitoring
-  class Logging
-}
-
-' === Connexions entre microservices via Gateway ===
-Gateway ..> Utilisateur
-Gateway ..> Annonce
-Gateway ..> DemandeEchange
-Gateway ..> Notification
-
-Gateway ..> ServiceDiscovery
-Gateway ..> Monitoring
-Gateway ..> Logging
 
 @enduml
+
 ```
 
 ___
@@ -70,18 +74,23 @@ ___
 skinparam packageStyle rectangle
 skinparam componentStyle rectangle
 
-' === API Gateway ===
-package "API Gateway" {
-  class Gateway {
-    +routeRequest()
-    +authentifier()
-    +rateLimit()
-    +monitor()
-  }
-}
+package "Application Monolithe" {
 
-' === Microservice Utilisateurs ===
-package "Microservice Utilisateurs" {
+  class Serveur {
+    +authentifier(email, motDePasse)
+    +creerAnnonce()
+    +modifierAnnonce()
+    +supprimerAnnonce()
+    +rechercherAnnonce()
+    +proposerCompetence()
+    +envoyerDemandeEchange()
+    +accepterDemande()
+    +refuserDemande()
+    +messagerie()
+    +donnerAvis()
+    +envoyerNotification()
+  }
+
   class Utilisateur {
     +id: UUID
     +nom: String
@@ -94,17 +103,6 @@ package "Microservice Utilisateurs" {
     +telephone: String
   }
 
-  class AuthService {
-    +login(email, motDePasse)
-    +generateJWT()
-    +validateToken()
-  }
-
-  Utilisateur "1" -- "0..1" AuthService
-}
-
-' === Microservice Annonces ===
-package "Microservice Annonces" {
   class Annonce {
     +id: UUID
     +titre: String
@@ -121,18 +119,6 @@ package "Microservice Annonces" {
     Competence
   }
 
-  class AnnonceService {
-    +creerAnnonce()
-    +rechercher()
-    +filtrer()
-  }
-
-  Utilisateur "1" -- "0..*" Annonce
-  AnnonceService ..> Annonce
-}
-
-' === Microservice Échanges ===
-package "Microservice Échanges" {
   class DemandeEchange {
     +id: UUID
     +dateProposee: Date
@@ -151,22 +137,6 @@ package "Microservice Échanges" {
     +dateEnvoi: Date
   }
 
-  class EchangeService {
-    +envoyerDemande()
-    +accepterDemande()
-    +refuserDemande()
-    +messagerie()
-  }
-
-  Annonce "1" -- "0..*" DemandeEchange : "cible"
-  Utilisateur "1" -- "0..*" DemandeEchange : "initie"
-  DemandeEchange "1" -- "0..*" Message
-  EchangeService ..> DemandeEchange
-  EchangeService ..> Message
-}
-
-' === Microservice Notifications ===
-package "Microservice Notifications" {
   class Notification {
     +id: UUID
     +type: NotificationType
@@ -182,35 +152,28 @@ package "Microservice Notifications" {
     NouvelAvis
   }
 
-  class NotificationService {
-    +envoyerNotification()
-    +pushEmail()
-    +pushSMS()
-    +pushInApp()
+  class DB <<database>> {
+    +stocke(Utilisateur, Annonce, DemandeEchange, Message, Notification)
   }
 
+  Utilisateur "1" -- "0..*" Annonce
+  Annonce "1" -- "0..*" DemandeEchange : "cible"
+  Utilisateur "1" -- "0..*" DemandeEchange : "initie"
+  DemandeEchange "1" -- "0..*" Message
   Utilisateur "1" -- "0..*" Notification
-  NotificationService ..> Notification
+
+  Serveur ..> Utilisateur
+  Serveur ..> Annonce
+  Serveur ..> DemandeEchange
+  Serveur ..> Message
+  Serveur ..> Notification
+
+  Utilisateur .. DB
+  Annonce .. DB
+  DemandeEchange .. DB
+  Message .. DB
+  Notification .. DB
 }
-
-' === Infrastructure transversale ===
-package "Infrastructure" {
-  class ConfigServer
-  class ServiceDiscovery
-  class Monitoring
-  class Logging
-
-  Gateway ..> ServiceDiscovery
-  Gateway ..> Monitoring
-  Gateway ..> Logging
-}
-
-' === Connexions entre microservices via Gateway ===
-Gateway ..> Utilisateur : "API Utilisateurs"
-Gateway ..> Annonce : "API Annonces"
-Gateway ..> DemandeEchange : "API Échanges"
-Gateway ..> Notification : "API Notifications"
-
 @enduml
 ```
 
