@@ -1,6 +1,6 @@
-package org.app;
+package git.projetgl;
 
-import org.app.utils.LoggerConfig;
+import git.projetgl.utils.LoggerConfig;
 
 import java.util.logging.Logger;
 
