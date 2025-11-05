@@ -21,8 +21,8 @@ public class Main {
 
         // Example logs
         LOGGER.info("Application started");
-        //LOGGER.warning("This is a warning message");
-        //LOGGER.severe("This is a critical error!");
+        LOGGER.warning("This is a warning message");
+        LOGGER.severe("This is a critical error!");
 
     }
 }
