@@ -17,9 +17,11 @@ public class Advert {
     @Column(nullable = false)
     private String desc;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AdvertType advertType;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AdvertStatus advertStatus;
 

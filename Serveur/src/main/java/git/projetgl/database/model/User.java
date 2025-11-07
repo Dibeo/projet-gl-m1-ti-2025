@@ -30,7 +30,8 @@ public class User {
     @Column
     private String location;
 
-    @Column
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private UserType userType;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
