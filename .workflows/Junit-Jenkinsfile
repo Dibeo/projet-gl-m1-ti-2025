@@ -15,23 +15,12 @@ pipeline {
             }
             post {
                 success {
-                    // Déclenche Build-Pipeline si tous les tests passent
-                    build job: 'Build-Jenkins', wait: false
+                    build job: 'Build', wait: false
                 }
                 always {
-                    // Publie les résultats JUnit dans Jenkins
                     junit 'Serveur/target/surefire-reports/*.xml'
                 }
             }
-        }
-    }
-
-    post {
-        success {
-            echo '✅ Tous les tests JUnit sont passés'
-        }
-        failure {
-            echo '❌ Des tests ont échoué'
         }
     }
 }
