@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+    tools {
+        jdk 'jdk17'
+        maven 'Maven3'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://git.univ-pau.fr/sfourre/test.git',
+                    credentialsId: 'gitlab-credentials-id'
+            }
+        }
+
+        stage('Build Serveur') {
+            steps {
+                dir('Serveur') {
+                    sh 'mvn clean install'
+                }
+            }
+        }
+
+        stage('Archive Artefacts') {
+            steps {
+                dir('Serveur/target') {
+                    archiveArtifacts artifacts: '*.jar', fingerprint: true
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Build réussi'
+        }
+        failure {
+            echo '❌ Build échoué'
+        }
+    }
+}
