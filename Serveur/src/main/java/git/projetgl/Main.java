@@ -1,5 +1,6 @@
 package git.projetgl;
 
+import git.projetgl.api.ApiServer;
 import git.projetgl.utils.LoggerConfig;
 
 import java.util.logging.Logger;
@@ -23,6 +24,9 @@ public class Main {
         LOGGER.info("Application started");
         LOGGER.warning("This is a warning message");
         LOGGER.severe("This is a critical error!");
+
+        ApiServer server = new ApiServer(4040);
+        server.start();
 
     }
 }
