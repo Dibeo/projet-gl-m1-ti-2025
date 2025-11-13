@@ -1,6 +1,6 @@
 package git.projetgl.api.handlers;
 
-import git.projetgl.database.model.User;
+import git.projetgl.database.model.AppUser;
 import git.projetgl.database.service.UserService;
 import io.javalin.http.Context;
 
@@ -17,14 +17,14 @@ public class UserHandler {
 
     // GET /users
     public void getAllUsers(Context ctx) {
-        List<User> users = userService.getAllUsers();
+        List<AppUser> users = userService.getAllUsers();
         ctx.json(users);
     }
 
     // GET /users/:id
     public void getUserById(Context ctx) {
         Long id = ctx.pathParamAsClass("id", Long.class).get();
-        Optional<User> user = userService.getUserById(id);
+        Optional<AppUser> user = userService.getUserById(id);
         if (user.isPresent()) {
             ctx.json(user.get());
         } else {
@@ -34,8 +34,8 @@ public class UserHandler {
 
     // POST /users
     public void createUser(Context ctx) {
-        User requestUser = ctx.bodyAsClass(User.class);
-        User created = userService.createUser(
+        AppUser requestUser = ctx.bodyAsClass(AppUser.class);
+        AppUser created = userService.createUser(
                 requestUser.getFirstName(),
                 requestUser.getLastName(),
                 requestUser.getEmail(),
@@ -48,16 +48,16 @@ public class UserHandler {
     // PUT /users/:id
     public void updateUser(Context ctx) {
         Long id = ctx.pathParamAsClass("id", Long.class).get();
-        User requestUser = ctx.bodyAsClass(User.class);
+        AppUser requestUser = ctx.bodyAsClass(AppUser.class);
         requestUser.setId(id);
-        User updated = userService.updateUser(requestUser);
+        AppUser updated = userService.updateUser(requestUser);
         ctx.json(updated);
     }
 
     // DELETE /users/:id
     public void deleteUser(Context ctx) {
         Long id = ctx.pathParamAsClass("id", Long.class).get();
-        Optional<User> user = userService.getUserById(id);
+        Optional<AppUser> user = userService.getUserById(id);
         if (user.isPresent()) {
             userService.deleteUser(user.get());
             ctx.status(204);

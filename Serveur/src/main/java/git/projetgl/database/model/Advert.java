@@ -15,7 +15,7 @@ public class Advert {
     private String title;
 
     @Column(nullable = false)
-    private String desc;
+    private String description;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -33,10 +33,10 @@ public class Advert {
         this.advertStatus = WAITING;
     }
 
-    public Advert(String title, String desc, AdvertType advertType, AppUser publisher) {
+    public Advert(String title, String description, AdvertType advertType, AppUser publisher) {
         this();
         this.title = title;
-        this.desc = desc;
+        this.description = description;
         this.advertType = advertType;
         this.publisher = publisher;
     }
@@ -50,11 +50,11 @@ public class Advert {
     }
 
     public String getDesc() {
-        return desc;
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDesc(String description) {
+        this.description = description;
     }
 
     public AdvertType getAdvertType() {

@@ -1,6 +1,6 @@
 package git.projetgl.database.repository;
 
-import git.projetgl.database.model.User;
+import git.projetgl.database.model.AppUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -11,7 +11,7 @@ public class UserRepository {
 
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
 
-    public User save(User user) {
+    public AppUser save(AppUser user) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(user);
@@ -20,33 +20,33 @@ public class UserRepository {
         return user;
     }
 
-    public Optional<User> findById(Long id) {
+    public Optional<AppUser> findById(Long id) {
         EntityManager em = emf.createEntityManager();
-        User user = em.find(User.class, id);
+        AppUser user = em.find(AppUser.class, id);
         em.close();
         return Optional.ofNullable(user);
     }
 
-    public List<User> findAll() {
+    public List<AppUser> findAll() {
         EntityManager em = emf.createEntityManager();
-        List<User> users = em.createQuery("FROM User", User.class).getResultList();
+        List<AppUser> users = em.createQuery("FROM User", AppUser.class).getResultList();
         em.close();
         return users;
     }
 
-    public User update(User user) {
+    public AppUser update(AppUser user) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        User updated = em.merge(user);
+        AppUser updated = em.merge(user);
         em.getTransaction().commit();
         em.close();
         return updated;
     }
 
-    public void delete(User user) {
+    public void delete(AppUser user) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        User managed = em.merge(user);
+        AppUser managed = em.merge(user);
         em.remove(managed);
         em.getTransaction().commit();
         em.close();
