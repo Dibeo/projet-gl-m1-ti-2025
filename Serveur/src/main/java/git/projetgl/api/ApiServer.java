@@ -40,7 +40,7 @@ public class ApiServer {
 
     public void start() {
         app.start(port);
-        LOGGER.info("Server start on localhost:"+port);
+        LOGGER.info("Server start on http://localhost:"+port);
     }
 
     public void stop() {
