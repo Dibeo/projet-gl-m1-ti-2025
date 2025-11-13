@@ -11,7 +11,7 @@ public class Application {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User applicant;
+    private AppUser requester;
 
     @ManyToOne
     @JoinColumn(name = "advert_id", nullable = false)
@@ -19,17 +19,17 @@ public class Application {
 
     public Application() {}
 
-    public Application(Advert advert, User applicant) {
-        this.applicant = applicant;
+    public Application(Advert advert, AppUser applicant) {
+        this.requester = applicant;
         this.advert = advert;
     }
 
-    public User getApplicant() {
-        return applicant;
+    public AppUser getApplicant() {
+        return requester;
     }
 
-    public void setApplicant(User applicant) {
-        this.applicant = applicant;
+    public void setApplicant(AppUser applicant) {
+        this.requester = applicant;
     }
 
     public Advert getAdvert() {

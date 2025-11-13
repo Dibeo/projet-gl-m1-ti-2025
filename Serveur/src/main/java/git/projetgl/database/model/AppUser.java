@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "appuser")
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,20 +34,20 @@ public class User {
     @Column(nullable = false)
     private UserType userType;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Advert> adverts;
 
     @OneToMany(mappedBy = "requester", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Application> applications;
 
-    @OneToMany(mappedBy = "message", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages;
 
-    protected User() {
+    protected AppUser() {
         this.userType = UserType.USER;
     }
 
-    public User(String firstName, String lastName, String email, String password, String location) {
+    public AppUser(String firstName, String lastName, String email, String password, String location) {
         this();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -56,7 +56,7 @@ public class User {
         this.location = location;
     }
 
-    public User(String firstName, String lastName, String email, String password, String location, String bio) {
+    public AppUser(String firstName, String lastName, String email, String password, String location, String bio) {
         this(firstName, lastName, email, password, location);
         this.bio = bio;
     }
@@ -116,6 +116,7 @@ public class User {
     public void setLocation(String location) {
         this.location = location;
     }
+
     public UserType getUserType() {
         return userType;
     }

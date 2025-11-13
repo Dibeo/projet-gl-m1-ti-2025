@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserTest {
-    private User user;
+class AppUserTest {
+    private AppUser user;
 
     @BeforeEach
     void setUp() {
-        this.user = new User("Alice", "Ecila", "alice@mail.com", "pwd123", "Paris");
+        this.user = new AppUser("Alice", "Ecila", "alice@mail.com", "pwd123", "Paris");
     }
 
     @Test

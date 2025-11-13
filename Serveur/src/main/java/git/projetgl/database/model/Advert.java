@@ -27,13 +27,13 @@ public class Advert {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User publisher;
+    private AppUser publisher;
 
     public Advert() {
         this.advertStatus = WAITING;
     }
 
-    public Advert(String title, String desc, AdvertType advertType, User publisher) {
+    public Advert(String title, String desc, AdvertType advertType, AppUser publisher) {
         this();
         this.title = title;
         this.desc = desc;
@@ -73,11 +73,11 @@ public class Advert {
         this.advertStatus = advertStatus;
     }
 
-    public User getPublisher() {
+    public AppUser getPublisher() {
         return publisher;
     }
 
-    public void setPublisher(User publisher) {
+    public void setPublisher(AppUser publisher) {
         this.publisher = publisher;
     }
 }

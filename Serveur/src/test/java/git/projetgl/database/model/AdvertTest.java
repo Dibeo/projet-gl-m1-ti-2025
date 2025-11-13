@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AdvertTest {
-    private User user;
+    private AppUser user;
     private Advert advert;
 
     @BeforeEach
     void setUp() {
-        this.user = new User("Alice", "Ecila", "alice@mail.com", "pwd123", "Paris");
+        this.user = new AppUser("Alice", "Ecila", "alice@mail.com", "pwd123", "Paris");
         this.advert = new Advert("advert title", "advert description", AdvertType.COMPETENCE, this.user);
     }
 

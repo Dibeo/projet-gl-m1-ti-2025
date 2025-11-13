@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MessageTest {
-    private User sender;
-    private User receiver;
+    private AppUser sender;
+    private AppUser receiver;
     private Message message;
 
     @BeforeEach
     void setUp() {
-        this.sender = new User("Alice", "Ecila", "alice@mail.com", "pwd123", "Paris");
-        this.receiver = new User("Bob", "Bob", "bob@mail.fr", "pwd456", "Paris");
+        this.sender = new AppUser("Alice", "Ecila", "alice@mail.com", "pwd123", "Paris");
+        this.receiver = new AppUser("Bob", "Bob", "bob@mail.fr", "pwd456", "Paris");
         this.message = new Message(this.sender, this.receiver, "message content");
     }
 

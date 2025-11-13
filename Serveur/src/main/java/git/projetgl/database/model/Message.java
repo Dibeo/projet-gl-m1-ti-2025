@@ -13,16 +13,16 @@ public class Message {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User sender;
+    @JoinColumn(name = "sender_id", nullable = false)
+    private AppUser sender;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User receiver;
+    private AppUser receiver;
 
     public Message() {}
 
-    public Message(User sender, User receiver, String content) {
+    public Message(AppUser sender, AppUser receiver, String content) {
         this.sender = sender;
         this.receiver = receiver;
         this.content = content;
@@ -36,19 +36,19 @@ public class Message {
         this.id = id;
     }
 
-    public User getSender() {
+    public AppUser getSender() {
         return sender;
     }
 
-    public void setSender(User sender) {
+    public void setSender(AppUser sender) {
         this.sender = sender;
     }
 
-    public User getReceiver() {
+    public AppUser getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(User receiver) {
+    public void setReceiver(AppUser receiver) {
         this.receiver = receiver;
     }
 

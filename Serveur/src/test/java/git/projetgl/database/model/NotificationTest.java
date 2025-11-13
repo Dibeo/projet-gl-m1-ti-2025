@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NotificationTest {
-    private User receiver;
+    private AppUser receiver;
     private Notification notif;
 
     @BeforeEach
     void setUp() {
-        this.receiver = new User("Alice", "Ecila", "alice@mail.fr", "pwd123", "Paris");
+        this.receiver = new AppUser("Alice", "Ecila", "alice@mail.fr", "pwd123", "Paris");
         this.notif = new Notification(this.receiver, "notification content", NotificationType.OTHER);
     }
 

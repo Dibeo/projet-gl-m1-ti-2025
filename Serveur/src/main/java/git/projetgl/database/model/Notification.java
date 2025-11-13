@@ -20,13 +20,13 @@ public class Notification {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User receiver;
+    private AppUser receiver;
 
 
     public Notification() {
     }
 
-    public Notification(User receiver, String content, NotificationType notificationType) {
+    public Notification(AppUser receiver, String content, NotificationType notificationType) {
         this.read = false;
         this.receiver = receiver;
         this.notificationType = notificationType;
@@ -65,11 +65,11 @@ public class Notification {
         this.notificationType = notificationType;
     }
 
-    public User getReceiver() {
+    public AppUser getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(User receiver) {
+    public void setReceiver(AppUser receiver) {
         this.receiver = receiver;
     }
 }
