@@ -47,7 +47,7 @@ public class LoggerConfig {
             public String format(LogRecord record) {
                 String color = switch (record.getLevel().getName()) {
                     case "SEVERE" -> RED;
-                    case "WARNING" -> YELLOW;
+                    case "WARNING", "WARN" -> YELLOW;
                     default -> BLUE;
                 };
                 return color + "[" + record.getLevel() + "] " + record.getMessage() + RESET + "\n";
