@@ -8,6 +8,7 @@ public class HelpPrinter {
                 "\t currently supported :\n" +
                 "\t\tpostgres\n" +
                 "\t\tsqlite\n" +
+                "\t-db-link, --database-link \tDatabase link\n" +
                 "\t-p, --port \tListening port\n" +
                 "\t-h, --help \tShow this massage");
     }

@@ -8,19 +8,14 @@ import git.projetgl.utils.LoggerConfig;
 
 import java.util.logging.Logger;
 
-public class AppInitializer {
+public record AppInitializer(AppConfig config) {
     private static final Logger LOGGER = Logger.getLogger(AppInitializer.class.getName());
-    private final AppConfig config;
-
-    public AppInitializer(AppConfig config) {
-        this.config = config;
-    }
 
     public void initialize() {
         LoggerConfig.setup(config.consoleLogs());
 
         DatabaseInitializer dbInitializer = selectDbInitializer();
-        dbInitializer.initialize(config.databaseType());
+        dbInitializer.initialize(config.databaseConfig());
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             LOGGER.info("Shutting down application...");
@@ -29,10 +24,10 @@ public class AppInitializer {
     }
 
     private DatabaseInitializer selectDbInitializer() {
-        return switch (config.databaseType()) {
+        return switch (config.databaseConfig().getDbType()) {
             case "postgres" -> new PostgresInitializer();
             case "sqlite" -> new SqliteInitializer();
-            default -> throw new IllegalArgumentException("Unsupported database: " + config.databaseType());
+            default -> throw new IllegalArgumentException("Unsupported database: " + config.databaseConfig().getDbType());
         };
     }
 }

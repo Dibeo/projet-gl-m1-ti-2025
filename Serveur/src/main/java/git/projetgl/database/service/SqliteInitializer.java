@@ -1,5 +1,6 @@
 package git.projetgl.database.service;
 
+import git.projetgl.config.DatabaseConfig;
 import git.projetgl.database.model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -14,7 +15,7 @@ public class SqliteInitializer implements DatabaseInitializer {
     private SessionFactory sessionFactory;
 
     @Override
-    public void initialize(String dbType) {
+    public void initialize(DatabaseConfig dbConfig) {
         if (sessionFactory != null) return;
 
         LOGGER.info("DB Init, type : sqlite");

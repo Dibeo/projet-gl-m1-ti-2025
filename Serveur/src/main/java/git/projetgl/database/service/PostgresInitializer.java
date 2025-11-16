@@ -1,5 +1,6 @@
 package git.projetgl.database.service;
 
+import git.projetgl.config.DatabaseConfig;
 import git.projetgl.database.model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -14,19 +15,28 @@ public class PostgresInitializer implements DatabaseInitializer {
     private SessionFactory sessionFactory;
 
     @Override
-    public void initialize(String dbType) {
+    public void initialize(DatabaseConfig config) {
         if (sessionFactory != null) return;
 
         LOGGER.info("Initializing PostgreSQL database...");
 
-        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate-postgres.cfg.xml").build();
+        StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder().configure("hibernate-postgres.cfg.xml");
+
+        if (config.getLink() != null) {
+            String url = "jdbc:postgresql://" + config.getLink();
+            registryBuilder.applySetting("hibernate.connection.url", url);
+        }
+
+        StandardServiceRegistry registry = registryBuilder.build();
 
         MetadataSources sources = new MetadataSources(registry).addAnnotatedClass(AppUser.class).addAnnotatedClass(Advert.class).addAnnotatedClass(Application.class).addAnnotatedClass(Message.class).addAnnotatedClass(Notification.class);
+
         Metadata metadata = sources.getMetadataBuilder().build();
         sessionFactory = metadata.buildSessionFactory();
 
         LOGGER.info("PostgreSQL database fully initialized");
     }
+
 
     @Override
     public void shutdown() {

@@ -7,7 +7,7 @@ import java.util.function.Function;
 
 public abstract class AbstractRepository {
 
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AppDatabasePU");
 
     protected <R> R execute(Function<EntityManager, R> function) {
         EntityManager em = emf.createEntityManager();

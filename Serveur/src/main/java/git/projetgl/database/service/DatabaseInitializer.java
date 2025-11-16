@@ -1,6 +1,8 @@
 package git.projetgl.database.service;
 
+import git.projetgl.config.DatabaseConfig;
+
 public interface DatabaseInitializer {
-    void initialize(String dbType);
+    void initialize(DatabaseConfig dbType);
     void shutdown();
 }

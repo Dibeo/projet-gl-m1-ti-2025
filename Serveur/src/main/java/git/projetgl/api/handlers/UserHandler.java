@@ -12,7 +12,7 @@ public class UserHandler {
     private static UserService userService;
 
     public UserHandler(UserService userService) {
-        this.userService = userService;
+        UserHandler.userService = userService;
     }
 
     // GET /users
