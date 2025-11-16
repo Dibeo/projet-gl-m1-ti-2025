@@ -1,5 +1,7 @@
 package git.projetgl.config;
 
+import git.projetgl.cli.HelpPrinter;
+
 public class ArgumentParser {
     public static AppConfig parse(String[] args) {
         boolean consoleLogs = false;
@@ -23,6 +25,11 @@ public class ArgumentParser {
                 if (i + 1 < args.length) {
                     port = Integer.parseInt(args[++i]);
                 }
+            }
+
+            if (arg.equalsIgnoreCase("-h") || arg.equalsIgnoreCase("--help")) {
+                HelpPrinter.printHelp();
+                System.exit(0);
             }
         }
 
