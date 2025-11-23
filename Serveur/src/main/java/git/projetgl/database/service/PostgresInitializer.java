@@ -20,7 +20,7 @@ public class PostgresInitializer implements DatabaseInitializer {
 
         LOGGER.info("Initializing PostgreSQL database...");
 
-        StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder().configure("hibernate-postgres.cfg.xml");
+        StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder().configure("hibernate-config/hibernate-postgres.cfg.xml");
 
         if (config.getLink() != null) {
             String url = "jdbc:postgresql://" + config.getLink();

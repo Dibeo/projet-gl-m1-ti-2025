@@ -19,7 +19,7 @@ public class SqliteInitializer implements DatabaseInitializer {
         if (sessionFactory != null) return;
 
         LOGGER.info("DB Init, type : sqlite");
-        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate-sqlite.cfg.xml").build();
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate-config/hibernate-sqlite.cfg.xml").build();
 
         MetadataSources sources = new MetadataSources(registry).addAnnotatedClass(AppUser.class).addAnnotatedClass(Advert.class).addAnnotatedClass(Application.class).addAnnotatedClass(Message.class).addAnnotatedClass(Notification.class);
 
