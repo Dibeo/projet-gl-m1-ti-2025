@@ -41,3 +41,31 @@ Serveur/build/
 
 ### Serveur ###
 Serveur/logs
+
+###### Client ######
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+Client/dist
+Client/tmp
+Client/out-tsc
+Client/bazel-out
+
+# Node
+Client/node_modules
+Client/npm-debug.log
+Client/yarn-error.log
+
+# Miscellaneous
+Client/.angular/cache
+Client/.sass-cache/
+Client/connect.lock
+Client/coverage
+Client/libpeerconnection.log
+Client/testem.log
+Client/typings
+Client/__screenshots__/
+
+# System files
+Client/.DS_Store
+Client/Thumbs.db
