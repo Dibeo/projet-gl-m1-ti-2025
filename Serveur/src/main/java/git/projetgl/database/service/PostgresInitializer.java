@@ -46,6 +46,7 @@ public class PostgresInitializer implements DatabaseInitializer {
         }
     }
 
+    @Override
     public SessionFactory getSessionFactory() {
         return sessionFactory;
     }

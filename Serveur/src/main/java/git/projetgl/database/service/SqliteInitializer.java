@@ -32,4 +32,9 @@ public class SqliteInitializer implements DatabaseInitializer {
     public void shutdown() {
         if (sessionFactory != null) sessionFactory.close();
     }
+
+    @Override
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 }
