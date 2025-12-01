@@ -3,6 +3,7 @@ Serveur/!.mvn/wrapper/maven-wrapper.jar
 Serveur/!**/src/main/**/target/
 Serveur/!**/src/test/**/target/
 Serveur/.kotlin
+Serveur/data/
 
 ### IntelliJ IDEA ###
 Serveur/.idea/

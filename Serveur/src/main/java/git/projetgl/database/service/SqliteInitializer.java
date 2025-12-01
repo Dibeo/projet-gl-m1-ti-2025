@@ -8,6 +8,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 public class SqliteInitializer implements DatabaseInitializer {
@@ -17,6 +18,15 @@ public class SqliteInitializer implements DatabaseInitializer {
     @Override
     public void initialize(DatabaseConfig dbConfig) {
         if (sessionFactory != null) return;
+        File dataDir = new File("data");
+        if (!dataDir.exists()) {
+            boolean dirCreated = dataDir.mkdirs();
+            if (dirCreated) {
+                LOGGER.info("Data directory created at: " + dataDir.getAbsolutePath());
+            } else {
+                LOGGER.severe("Failed to create data directory: " + dataDir.getAbsolutePath());
+            }
+        }
 
         LOGGER.info("DB Init, type : sqlite");
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate-config/hibernate-sqlite.cfg.xml").build();
