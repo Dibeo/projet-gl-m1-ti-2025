@@ -1,0 +1,20 @@
+{
+	"nodes":[
+		{"id":"notification_table","type":"text","text":"Notification\n\n| id             | char                     |\n| --------------- | ------------------------ |\n| utilisateur_id  | char (FK → Utilisateur.id) |\n| type            | varchar(50)              |\n| message         | varchar(200)             |\n| date            | datetime                 |","x":-1040,"y":-870,"width":380,"height":240},
+		{"id":"cfa9a308e29d7c22","type":"text","text":"Utilisateur\n\n| <ins>id</ins> | long   |\n| ------------- | ------ |\n| nom           | string |\n| prenom        | string |\n| email         | string |\n| mdp           | string |\n| bio           | string |\n| localisation  | string |\n| note_moyenne  | float  |","x":-600,"y":-330,"width":345,"height":370},
+		{"id":"message_table","type":"text","text":"Message\n\n| id           | char                  |\n| ------------- | -------------------- |\n| echange_id    | char (FK → Echange.id) |\n| expediteur_id | char (FK → Utilisateur.id) |\n| contenu       | text                 |\n| date_envoi    | datetime             |","x":-300,"y":-960,"width":380,"height":260},
+		{"id":"echange_table","type":"text","text":"Echange\n\n| id                      | char            |\n| ----------------------- | ---------------- |\n| annonce_id              | char (FK → Annonce.id) |\n| utilisateur_demandeur_id| char (FK → Utilisateur.id) |\n| date                    | datetime         |\n| statut                  | enum('en attente','accepte','refuse') |","x":580,"y":-520,"width":420,"height":300},
+		{"id":"avis_table","type":"text","text":"Avis\n\n| id          | char                     |\n| ------------ | ------------------------ |\n| echange_id   | char (FK → Echange.id)   |\n| auteur_id    | char (FK → Utilisateur.id) |\n| note         | int                      |\n| commentaire  | varchar(300)             |","x":-40,"y":-90,"width":380,"height":260},
+		{"id":"5d3788b202c3674c","type":"text","text":"Annonce\n\n| id            | char               |\n| ------------- | ------------------ |\n| titre         | varchar(150)       |\n| description   | varchar(300)       |\n| type          | enum(TypeAnnonce)  |\n| categorie     | varchar(100)       |\n| utilisateur_id| char (FK → Utilisateur.id) |","x":-450,"y":360,"width":340,"height":320}
+	],
+	"edges":[
+		{"id":"edge_user_annonce","fromNode":"cfa9a308e29d7c22","fromSide":"bottom","toNode":"5d3788b202c3674c","toSide":"top","label":"1 —— 0..*"},
+		{"id":"edge_user_echange","fromNode":"cfa9a308e29d7c22","fromSide":"right","toNode":"echange_table","toSide":"left","label":"1 —— 0..*"},
+		{"id":"edge_annonce_echange","fromNode":"5d3788b202c3674c","fromSide":"right","toNode":"echange_table","toSide":"bottom","label":"1 —— 0..*"},
+		{"id":"edge_echange_message","fromNode":"echange_table","fromSide":"top","toNode":"message_table","toSide":"right","label":"1 —— 0..*"},
+		{"id":"edge_user_message","fromNode":"cfa9a308e29d7c22","fromSide":"right","toNode":"message_table","toSide":"bottom","label":"1 —— 0..*"},
+		{"id":"edge_echange_avis","fromNode":"echange_table","fromSide":"bottom","toNode":"avis_table","toSide":"right","label":"1 —— 0..1"},
+		{"id":"edge_user_avis","fromNode":"cfa9a308e29d7c22","fromSide":"right","toNode":"avis_table","toSide":"left","label":"1 —— 0..*"},
+		{"id":"edge_user_notification","fromNode":"cfa9a308e29d7c22","fromSide":"left","toNode":"notification_table","toSide":"bottom","label":"1 —— 0..*"}
+	]
+}

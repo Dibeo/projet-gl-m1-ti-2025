@@ -1,0 +1,33 @@
+name: Serveur CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - Serveur
+
+jobs:
+  build:
+    name: Build and Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Build and Run Tests with Maven
+        working-directory: Serveur
+        run: mvn -B clean test
+
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v5
+        if: success() || failure()
+        with:
+          report_paths: 'Serveur/**/target/surefire-reports/TEST-*.xml'

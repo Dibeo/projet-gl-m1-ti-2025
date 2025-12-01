@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    tools {
+        jdk 'jdk17'
+        maven 'Maven3'
+    }
+
+    stages {
+        stage('Run JUnit Tests') {
+            steps {
+                dir('Serveur') {
+                    sh 'mvn test'
+                }
+            }
+            post {
+                success {
+                    build job: 'Build', wait: false
+                }
+                always {
+                    junit 'Serveur/target/surefire-reports/*.xml'
+                }
+            }
+        }
+    }
+}
