@@ -39,4 +39,8 @@ public class Application {
     public void setAdvert(Advert advert) {
         this.advert = advert;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

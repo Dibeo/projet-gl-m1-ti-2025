@@ -80,4 +80,8 @@ public class Advert {
     public void setPublisher(AppUser publisher) {
         this.publisher = publisher;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
