@@ -226,6 +226,11 @@ label {
   top: 0;
 }
 
+button {
+  background: transparent;
+  box-shadow: none;
+}
+
 @media (max-width: 768px) {
   .nav-sections,
   .search-bar,

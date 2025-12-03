@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AppUserService } from "../../core/services/app-user.service";
 import { AppUser } from "../../core/services/app-user.service";
 
+import Swal from 'sweetalert2'
+
 @Component({
   selector: "app-signup",
   templateUrl: "./signup.html",
@@ -45,7 +47,6 @@ export class Signup implements OnInit {
 
   onSubmit() {
     if (this.signupForm.invalid) {
-      console.error("NOOOOON");
       Object.keys(this.signupForm.controls).forEach((key) => {
         const control = this.signupForm.get(key);
         if (control?.invalid) {
@@ -70,6 +71,11 @@ export class Signup implements OnInit {
         this.successMessage = "Inscription réussie ! Bienvenue 🎉";
         this.errorMessage = "";
         this.signupForm.reset();
+        Swal.fire({
+  title: "Good job!",
+  text: "You clicked the button!",
+  icon: "success"
+});
       },
       error: (err) => {
         this.errorMessage = "Une erreur est survenue lors de l'inscription.";
