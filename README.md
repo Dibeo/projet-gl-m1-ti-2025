@@ -1,54 +1,92 @@
-# Projet d’application d’échange local
+# Application d’Échange Local
 
-## Description
-Ce projet a pour objectif de développer une application d’échange local permettant aux utilisateurs de :  
-- Publier et rechercher des annonces d’objets ou de compétences,  
-- Envoyer et gérer des demandes d’échanges,  
-- Noter et évaluer les utilisateurs,  
-- Être notifiés en temps réel des interactions.  
-
-L’architecture est conçue pour être modulaire, évolutive et robuste, avec un frontend en couches et un backend en microservices.
+Une plateforme permettant aux utilisateurs d’échanger des objets ou des compétences au sein d’une même communauté.
 
 ---
 
-## Structure actuelle du projet
-Pour le moment, le projet contient uniquement la **Documentation** générale :
+## Description du projet
 
----
+Cette application vise à faciliter l’échange local grâce à une interface intuitive et une architecture moderne.
+Les utilisateurs peuvent :
+
+* Publier, rechercher et filtrer des annonces,
+* Envoyer et gérer des demandes d’échanges,
+* Noter et évaluer les autres utilisateurs,
+* Recevoir des notifications en temps réel (push),
+* Suivre leurs échanges via une interface claire.
+
+L’architecture générale du projet repose sur :
+
+* Un frontend modulable basé sur une architecture en couches (utilisation de Angular),
+* Un backend robuste monolithique (Javalin).
+
 ## Vision architecturale
 
-Documentation/SRS contient :  
-- Le patron d’architecture du client (pattern en couches),  
-- Le patron d’architecture du serveur (pattern microservices),  
-- Les besoins fonctionnels et techniques associés.  
+### Client (Front-end)
 
-- **Client (Front-end)** : architecture en couches  
-  - Présentation (UI)  
-  - Services applicatifs  
-  - Domaine (modèles)  
-  - Infrastructure (API, WebSocket)  
+Architecture en couches :
 
-- **Serveur (Back-end)** : architecture microservices  
-  - Microservice Utilisateurs  
-  - Microservice Annonces  
-  - Microservice Échanges  
-  - Microservice Notifications  
-  - API Gateway et services transverses (Discovery, Monitoring, Config, Sécurité)  
+* Présentation (UI) : Composants Angular, pages, layout
+* Services applicatifs : logique métier front
+* Domaine (modèles) : entités, types
+* Infrastructure : appels API REST
+
+### Serveur (Back-end)
+
+Architecture Monolithique, en suivant la methode SOLID :
+---
+
+## Diagrammes UML
+
+Disponibles dans `Doc` (type mermaid):
+
+* Schéma entité relation de la BDD (Database.md),
+* Diagrammes de classes coté serveur (Serveur.md).
+
+_Version PNG dans assets_
 
 ---
-## Diagramme UML
 
-Documentation/UML contient :
-- Le diagramme de cas d'utilisation,
-- Le diagramme de classe coté client (versions light et détaillée).
+## Lancement du projet
+
+### Lancer le client (Angular)
+
+Avoir Node.js + Angular CLI installés.
+
+```bash
+cd client
+npm install
+ng serve
+```
+
+L’application sera disponible sur :
+[http://localhost:4200/](http://localhost:4200/)
+
+---
+
+## Lancer le serveur (Monolithique)
+
+```bash
+cd Serveur
+java -jar target/Serveur-1.0-SNAPSHOT.jar [options]
+```
+
+#### Options:
+
+- `-l`, `--logs`: Active la visualisation des logs
+- `-db`, `--database`: Type de base de données :_(defaut : Postgres)_
+  - Supporté :
+    - `postgres` 
+    - `sqlite`
+- `-db-link`, `--database-link`: lien vers la base _(defaut : localhost)_
+- `-p`, `--port`: port vers la base _(defaut : 4040)_
+- `-h`, `--help`: Affiche ce message d'aide
 
 ---
 
 ## Documentation
-La doc (ouvrable avec Obsidian) contient :  
-- Les schémas Canvas (Obsidian),  
-- Les schémas UML,
-- Les besoins fonctionnels,  
-- L’architecture cible.  
 
----
+Accessible dans le dossier `Doc/` :
+
+* UML
+* Besoins fonctionnels (SRS)
