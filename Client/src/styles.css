@@ -12,4 +12,5 @@ body {
   line-height: 1.5;
   font-family: var(--font-family-sans-serif);
   color: var(--color-text);
+  overflow-x: hidden;
 }
