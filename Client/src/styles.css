@@ -1,15 +1,15 @@
 :host {
-  --bright-text: aliceblue;
+  --color-text: aliceblue;
 }
 
 body {
   margin: 0;
-  font-family: var(--font-family-sans-serif);
+  height: 100vh;
+  width: 100vw;
+  opacity: 1;
+  background-color: #252525;
   font-size: 1rem;
   line-height: 1.5;
+  font-family: var(--font-family-sans-serif);
   color: var(--color-text);
-
-  /* A vibrant background is essential to see the glassmorphism effect. */
-  background-image: linear-gradient(45deg, #1d1d1d, #1c142c);
-  background-attachment: fixed;
 }
