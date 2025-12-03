@@ -32,9 +32,14 @@ public class AppUserHandler {
     }
 
     public void createUser(Context ctx) {
-        AppUser user = ctx.bodyAsClass(AppUser.class);
-        AppUser created = appUserService.createUser(user);
-        ctx.status(201).json(created);
+        try {
+            AppUser user = ctx.bodyAsClass(AppUser.class);
+            AppUser created = appUserService.createUser(user);
+            ctx.status(201).json(created);
+        } catch (Exception e){
+            ctx.status(400);
+        }
+
     }
 
     public void updateUser(Context ctx) {

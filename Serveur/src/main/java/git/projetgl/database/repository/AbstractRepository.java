@@ -21,7 +21,7 @@ public abstract class AbstractRepository {
             session.getTransaction().commit();
             return result;
         } catch (RuntimeException e) {
-            throw e;
+            throw new RuntimeException("Erreur Hibernate", e);
         }
     }
 
