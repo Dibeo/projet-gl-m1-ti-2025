@@ -56,4 +56,8 @@ public class Application {
     public void setApplicationStatus(Status applicationStatus) {
         this.applicationStatus = applicationStatus;
     }
+  
+    public Long getId() {
+        return id;
+    }
 }
