@@ -1,0 +1,43 @@
+<div class="dashboard-container">
+  <h2>📊 Mon Dashboard</h2>
+
+  <div class="dashboard-content">
+    <div class="form-card card">
+      <h3>➕ Créer une nouvelle annonce</h3>
+
+      <input type="text" placeholder="Titre" [(ngModel)]="newAdvert.title" />
+
+      <textarea rows="4" placeholder="Description" [(ngModel)]="newAdvert.desc"></textarea>
+
+      <select name="type" id="type" [(ngModel)]="newAdvert.advertType">
+        <option value="COMPETENCE">Service</option>
+        <option value="OBJECT">Item</option>
+        <option value="OTHER">Other</option>
+      </select>
+
+      <button (click)="createAdvert()">Créer</button>
+    </div>
+
+    <div class="adverts-section">
+      <h3>📢 Mes annonces</h3>
+
+      @if (loading()) {
+      <div>Chargement des annonces...</div>
+      } @if (!loading() && adverts().length === 0) {
+      <div>Aucune annonce disponible.</div>
+      }
+
+      <div class="adverts-container">
+        @for (advert of adverts(); track [advert.date, advert.publisher]) {
+        <app-advert-detailed-card [advert]="advert"></app-advert-detailed-card>
+        } @empty {
+        <div>Aucune annonce trouvée</div>
+        }
+      </div>
+
+      @if (errorMessage()) {
+      <div style="color: red">{{ errorMessage() }}</div>
+      }
+    </div>
+  </div>
+</div>

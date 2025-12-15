@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AppUser } from './app-user.service';
 
 export interface Advert {
   id?: number;
   title: string;
-  description: string;
-  advertType?: string;
+  desc: string;
+  advertType: string;
   advertStatus?: string;
-  userId?: number;
+  date? : Date;
+  publisher?: AppUser; 
 }
 
 @Injectable({

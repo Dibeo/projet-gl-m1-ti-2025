@@ -1,0 +1,32 @@
+<div class="advert-card card">
+  <h4>{{ advert.title }}</h4>
+  <p>{{ advert.desc }}</p>
+  <span class="status">{{ advert.advertStatus || 'Brouillon' }}</span>
+
+  <p><strong>Type:</strong> {{ advert.advertType }}</p>
+  <p><strong>Publisher:</strong> {{ advert.publisher?.firstName }} {{ advert.publisher?.lastName }}</p>
+
+  <div class="applications-section">
+    <h5>Personnes ayant postulé:</h5>
+
+    @if (loadingApplications()) {
+      <div>Chargement des candidatures...</div>
+    }
+
+    @if (!loadingApplications() && applications().length === 0) {
+      <div>Aucune candidature.</div>
+    }
+
+    <ul>
+      @for (app of applications(); track app.id) {
+        <li>User ID: {{ app.userId }}</li>
+      } @empty {
+        <li>Aucune candidature.</li>
+      }
+    </ul>
+
+    @if (error()) {
+      <div class="error">{{ error() }}</div>
+    }
+  </div>
+</div>

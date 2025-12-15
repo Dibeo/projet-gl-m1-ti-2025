@@ -2,7 +2,7 @@ package git.projetgl.database.model;
 
 import jakarta.persistence.*;
 
-import static git.projetgl.database.model.AdvertStatus.WAITING;
+import static git.projetgl.database.model.Status.WAITING;
 
 @Entity
 @Table(name = "advert")
@@ -23,7 +23,7 @@ public class Advert {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private AdvertStatus advertStatus;
+    private Status advertStatus;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -65,11 +65,11 @@ public class Advert {
         this.advertType = advertType;
     }
 
-    public AdvertStatus getAdvertStatus() {
+    public Status getAdvertStatus() {
         return advertStatus;
     }
 
-    public void setAdvertStatus(AdvertStatus advertStatus) {
+    public void setAdvertStatus(Status advertStatus) {
         this.advertStatus = advertStatus;
     }
 

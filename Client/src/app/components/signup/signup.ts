@@ -2,17 +2,16 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
-import { AppUserService } from "../../core/services/app-user.service";
-import { AppUser } from "../../core/services/app-user.service";
-
-import Swal from 'sweetalert2'
+import { AppUserService, AppUser } from "../../core/services/app-user.service";
+import { CookieService } from "ngx-cookie-service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-signup",
   templateUrl: "./signup.html",
   styleUrls: ["./signup.css"],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule],
 })
 export class Signup implements OnInit {
   signupForm!: FormGroup;
@@ -21,7 +20,8 @@ export class Signup implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userService: AppUserService
+    private userService: AppUserService,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class Signup implements OnInit {
         bio: ["", Validators.required],
         location: ["", Validators.required],
         password: ["", [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ["", Validators.required]
+        confirmPassword: ["", Validators.required],
       },
       { validators: this.passwordMatchValidator }
     );
@@ -63,25 +63,36 @@ export class Signup implements OnInit {
       password: this.signupForm.value.password,
       bio: this.signupForm.value.bio,
       location: this.signupForm.value.location,
-      userType: "USER"
+      userType: "USER",
     };
 
     this.userService.create(newUser).subscribe({
       next: (res) => {
+        const { password, ...safeUser } = res;
+
+        this.cookieService.set(
+          "connected_user",
+          JSON.stringify(safeUser),
+          1, // durée 1 jour, ou plus si "remember me"
+          "/"
+        );
+
         this.successMessage = "Inscription réussie ! Bienvenue 🎉";
         this.errorMessage = "";
         this.signupForm.reset();
+
         Swal.fire({
-  title: "Good job!",
-  text: "You clicked the button!",
-  icon: "success"
-});
+          title: "Inscription réussie !",
+          text: `Bienvenue ${safeUser.firstName} !`,
+          icon: "success",
+        });
       },
       error: (err) => {
-        this.errorMessage = "Une erreur est survenue lors de l'inscription.";
+        this.errorMessage =
+          "Une erreur est survenue lors de l'inscription.";
         this.successMessage = "";
         console.error(err);
-      }
+      },
     });
   }
 }

@@ -13,11 +13,27 @@ public class AppUserRepository extends AbstractRepository {
     }
 
     public AppUser findById(Long id) {
-        return execute(em -> em.find(AppUser.class, id));
+        return execute(em -> {
+            AppUser user = em.find(AppUser.class, id);
+            if (user != null) {
+                user.getAdverts().size();
+                user.getApplications().size();
+                user.getMessages().size();
+            }
+            return user;
+        });
     }
 
     public List<AppUser> findAll() {
-        return execute(em -> em.createQuery("FROM AppUser", AppUser.class).getResultList());
+        return execute(em -> {
+            List<AppUser> users = em.createQuery("FROM AppUser", AppUser.class).getResultList();
+            for (AppUser user : users) {
+                user.getAdverts().size();
+                user.getApplications().size();
+                user.getMessages().size();
+            }
+            return users;
+        });
     }
 
     public AppUser save(AppUser user) {

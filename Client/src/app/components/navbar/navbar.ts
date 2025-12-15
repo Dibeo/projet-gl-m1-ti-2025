@@ -9,6 +9,7 @@ export class Navbar implements OnInit {
   isScrolled = false;
   notifCount : Number = 1;
   msgCount : Number = 2;
+  connected : boolean = false;
 
   constructor() { }
 

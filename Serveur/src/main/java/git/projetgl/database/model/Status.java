@@ -1,6 +1,6 @@
 package git.projetgl.database.model;
 
-public enum AdvertStatus {
+public enum Status {
     WAITING,
     ACCEPTED,
     REFUSED
