@@ -1,4 +1,7 @@
 <div class="advert-card card">
+  <!-- Bouton de suppression -->
+  <button class="delete-btn" (click)="deleteAdvert(advert.id)">✖</button>
+
   <h4>{{ advert.title }}</h4>
   <p>{{ advert.desc }}</p>
   <span class="status">{{ advert.advertStatus || 'Brouillon' }}</span>

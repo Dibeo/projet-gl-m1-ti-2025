@@ -1,12 +1,22 @@
 <div class="card">
-  <h3>{{ advert.title }}</h3>
-  <p>{{ advert.desc }}</p>
-  <p><strong>Type:</strong> {{ advert.advertType }}</p>
-  <p><strong>Status:</strong> {{ advert.advertStatus }}</p>
-  <p>
-    <strong>Publisher:</strong> {{ advert.publisher?.firstName }} {{ advert.publisher?.lastName }}
-  </p>
-  <p>
-    <button>Apply</button><button><img src="icons/msg_icon.svg" alt="message" /></button>
-  </p>
+  <div>
+    <h3>{{ advert.title }}</h3>
+    <p>{{ advert.desc }}</p>
+
+    <p><strong>Type:</strong> {{ advert.advertType }}</p>
+    <p><strong>Status:</strong> {{ advert.advertStatus }}</p>
+
+    <p>
+      <strong>Publisher:</strong>
+      {{ advert.publisher?.firstName }} {{ advert.publisher?.lastName }}
+    </p>
+
+    <div class="card-actions">
+      <button class="apply-btn">Apply</button>
+      <button class="msg-btn" (click)="onApplyClick()">
+        <img src="icons/msg_icon.svg" alt="message" />
+      </button>
+    </div>
+  </div>
+  <img class="card-image" [src]="imageUrl" alt="Annonce image" />
 </div>

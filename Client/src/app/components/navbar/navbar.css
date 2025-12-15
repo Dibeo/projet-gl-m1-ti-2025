@@ -242,3 +242,38 @@ button {
     display: block;
   }
 }
+
+/* Bouton Add Advert dans la navbar */
+.add-advert-btn a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #3a80ff; /* bleu lumineux */
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.add-advert-btn a i {
+  font-size: 1rem;
+}
+
+/* Hover effect */
+.add-advert-btn a:hover {
+  background-color: #245ecf;
+  transform: translateY(-1px);
+}
+
+/* Responsive : bouton passe en full width sur mobile */
+@media (max-width: 768px) {
+  .add-advert-btn {
+    margin: 0.5rem 0;
+  }
+  .add-advert-btn a {
+    width: 100%;
+    justify-content: center;
+  }
+}

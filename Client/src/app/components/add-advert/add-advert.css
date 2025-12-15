@@ -1,0 +1,109 @@
+/* Card générale */
+.form-card {
+  display: flex;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  flex-direction: column;
+  width: 50%;
+  gap: 5px;
+  align-self: center;
+  justify-self: center;
+}
+
+/* Titre */
+.form-card h3 {
+  font-size: 1.5rem;
+  color: #f0f0f0;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Input et textarea */
+.form-card input,
+.form-card textarea,
+.form-card select {
+  width: 95%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #444; /* bord sombre */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  color: #f0f0f0; /* texte clair */
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.row {
+  display: inline;
+  gap: 15px;
+
+  select {
+    width: 87%;
+  }
+
+  button {
+    padding: 0.75rem 1rem;
+    background-color: #212c41; /* bleu lumineux */
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+}
+
+.form-card input::placeholder,
+.form-card textarea::placeholder {
+  color: #aaa; /* placeholder clair mais discret */
+}
+
+.form-card input:focus,
+.form-card textarea:focus,
+.form-card select:focus {
+  border-color: #3a80ff;
+}
+
+/* Bouton */
+.form-card > button {
+  padding: 0.75rem 1rem;
+  background-color: #1e4388; /* bleu lumineux */
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.form-card button:hover {
+  background-color: #245ecf;
+  transform: translateY(-1px);
+}
+
+.form-card button:active {
+  transform: translateY(0);
+}
+
+/* Select options */
+.form-card select option {
+  padding: 0.5rem;
+  background-color: #252525;
+  color: #f0f0f0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .form-card {
+    padding: 1.5rem;
+  }
+}

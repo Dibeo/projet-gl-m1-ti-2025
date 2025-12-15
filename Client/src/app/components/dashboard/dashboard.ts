@@ -48,6 +48,7 @@ export class Dashboard implements OnInit {
     this.loading.set(true);
     this.advertService.getAll().subscribe({
       next: (data) => {
+        console.log(data);
         const userAdverts = data.filter(
           (advert) => advert.publisher?.id === this.connectedUser.id
         );
@@ -58,26 +59,6 @@ export class Dashboard implements OnInit {
         console.error(err);
         this.errorMessage.set('Erreur lors du chargement des annonces');
         this.loading.set(false);
-      },
-    });
-  }
-
-  createAdvert(): void {
-    if (!this.newAdvert.title || !this.newAdvert.desc) return;
-
-    this.advertService.create(this.newAdvert).subscribe({
-      next: () => {
-        this.newAdvert = {
-          title: '',
-          desc: '',
-          publisher: { id: this.connectedUser.id } as AppUser,
-          advertType: 'OTHER',
-        };
-        this.loadUserAdverts();
-      },
-      error: (err) => {
-        console.error(err);
-        this.errorMessage.set('Erreur lors de la création de l’annonce');
       },
     });
   }

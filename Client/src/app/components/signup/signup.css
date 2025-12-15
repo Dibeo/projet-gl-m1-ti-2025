@@ -45,7 +45,7 @@ label {
 }
 
 input {
-  width: 100%;
+  width: fit-content;
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -123,8 +123,4 @@ button:disabled {
     grid-column: span 1;
   }
 
-  .radio-group {
-    flex-direction: column;
-    gap: 10px;
-  }
 }
