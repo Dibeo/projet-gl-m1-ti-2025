@@ -1,5 +1,61 @@
 ```mermaid
 classDiagram
+direction TB
+
+%% Blocs principaux
+class Main {
+    <<entry point>>
+}
+class AppInitializer {
+    <<initialization>>
+}
+class ApiServer {
+    <<REST API>>
+}
+class CLI {
+    <<command line>>
+}
+class Logger {
+    <<utility>>
+}
+class Database {
+    <<storage>>
+}
+
+%% Entités principales
+class User
+class Advert
+class Application
+class Message
+class Notification
+
+%% Relations principales
+Main --> AppInitializer : 1
+Main --> ApiServer : 1
+Main --> CLI : 1
+
+AppInitializer --> Database : 1
+AppInitializer --> Logger : 1
+
+ApiServer --> User : 0..*
+ApiServer --> Advert : 0..*
+ApiServer --> Application : 0..*
+ApiServer --> Message : 0..*
+ApiServer --> Notification : 0..*
+
+Database --> User : 0..*
+Database --> Advert : 0..*
+Database --> Application : 0..*
+Database --> Message : 0..*
+Database --> Notification : 0..*
+
+```
+
+------
+
+
+```mermaid
+classDiagram
 direction LR
 
 class Main {

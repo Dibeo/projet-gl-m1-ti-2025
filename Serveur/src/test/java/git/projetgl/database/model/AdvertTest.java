@@ -21,7 +21,7 @@ class AdvertTest {
         assertEquals("advert title", advert.getTitle());
         assertEquals("advert description", advert.getDesc());
         assertEquals(AdvertType.COMPETENCE, advert.getAdvertType());
-        assertEquals(AdvertStatus.WAITING, advert.getAdvertStatus());
+        assertEquals(Status.WAITING, advert.getAdvertStatus());
     }
 
     @AfterEach
