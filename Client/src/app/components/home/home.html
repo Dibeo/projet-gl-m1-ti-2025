@@ -1,0 +1,19 @@
+@if (loading()) {
+  <div>Chargement des annonces...</div>
+}
+
+@if (!loading() && adverts().length === 0) {
+  <div>Aucune annonce disponible.</div>
+}
+
+<div class="adverts-container">
+  @for (advert of adverts(); track [advert.date, advert.publisher]) {
+    <app-advert-card [advert]="advert"></app-advert-card>
+  } @empty {
+    <div>Aucune annonce trouvée</div>
+  }
+</div>
+
+@if (errorMessage()) {
+  <div style="color:red;">{{ errorMessage() }}</div>
+}

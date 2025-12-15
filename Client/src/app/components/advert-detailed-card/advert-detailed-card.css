@@ -1,0 +1,94 @@
+/* Container global pour toutes les cartes */
+.adverts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+/* Style de la carte avec glassmorphism */
+.card {
+  background: rgba(255, 255, 255, 0.15); /* léger fond translucide */
+  backdrop-filter: blur(10px); /* effet flou */
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Hover effet */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Titres et paragraphes */
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.card p {
+  margin: 0.25rem 0;
+  font-size: 1rem;
+  color: #f0f0f0;
+}
+
+.advert-card {
+  padding: 1rem;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+}
+
+.advert-card .applications-section {
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.advert-card .applications-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.advert-card .applications-section li {
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+}
+
+.advert-card {
+  position: relative;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #ff4d4f;
+}
+
+.delete-btn:hover {
+  color: #ff0000;
+}

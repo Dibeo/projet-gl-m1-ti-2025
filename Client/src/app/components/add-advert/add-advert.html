@@ -1,0 +1,18 @@
+<div class="form-card card">
+  <h3>➕ Créer une nouvelle annonce</h3>
+
+  <input type="text" placeholder="Titre" [(ngModel)]="newAdvert.title" />
+
+  <textarea rows="4" placeholder="Description" [(ngModel)]="newAdvert.desc"></textarea>
+
+  <div class ="row">
+    <select name="type" id="type" [(ngModel)]="newAdvert.advertType">
+      <option value="COMPETENCE">Service</option>
+      <option value="OBJECT">Item</option>
+      <option value="OTHER">Other</option>
+    </select>
+    <button (click)="onApplyClick()">Add picture</button>
+  </div>
+
+  <button (click)="createAdvert()">Créer</button>
+</div>

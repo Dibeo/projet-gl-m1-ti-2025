@@ -27,6 +27,11 @@ public class ApiServer {
 
         this.app = Javalin.create(config -> {
             config.router.ignoreTrailingSlashes = true;
+            config.bundledPlugins.enableCors(cors -> {
+                cors.addRule(it -> {
+                    it.allowHost("http://localhost:4200");
+                });
+            });
         });
 
         app.get("/test", getHandler::handleTest);

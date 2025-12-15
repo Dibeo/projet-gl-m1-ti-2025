@@ -1,7 +1,9 @@
 package git.projetgl.database.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,14 +36,17 @@ public class AppUser {
     @Column(nullable = false)
     private UserType userType;
 
-    @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Advert> adverts;
+    @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Advert> adverts  = new ArrayList<>();
 
-    @OneToMany(mappedBy = "requester", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Application> applications;
+    @OneToMany(mappedBy = "requester", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Application> applications  = new ArrayList<>();
 
-    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Message> messages;
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Message> messages  = new ArrayList<>();
 
     protected AppUser() {
         this.userType = UserType.USER;

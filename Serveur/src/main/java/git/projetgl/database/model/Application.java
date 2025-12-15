@@ -2,6 +2,8 @@ package git.projetgl.database.model;
 
 import jakarta.persistence.*;
 
+import static git.projetgl.database.model.Status.WAITING;
+
 @Entity
 @Table(name = "application")
 public class Application {
@@ -17,9 +19,16 @@ public class Application {
     @JoinColumn(name = "advert_id", nullable = false)
     private Advert advert;
 
-    public Application() {}
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status applicationStatus;
+
+    public Application() {
+        this.applicationStatus = WAITING;
+    }
 
     public Application(Advert advert, AppUser applicant) {
+        super();
         this.requester = applicant;
         this.advert = advert;
     }
@@ -40,6 +49,14 @@ public class Application {
         this.advert = advert;
     }
 
+    public Status getApplicationStatus() {
+        return applicationStatus;
+    }
+
+    public void setApplicationStatus(Status applicationStatus) {
+        this.applicationStatus = applicationStatus;
+    }
+  
     public Long getId() {
         return id;
     }

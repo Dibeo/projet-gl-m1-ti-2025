@@ -1,0 +1,20 @@
+.adverts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* centre les cartes horizontalement */
+  gap: 24px;                /* espace entre les cartes */
+  width: 100%;
+  margin-top: 24px;
+}
+
+app-advert-card {
+  width: 70%;
+  max-width: 900px;         /* évite trop large sur grands écrans */
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+  app-advert-card {
+    width: 95%;
+  }
+}
