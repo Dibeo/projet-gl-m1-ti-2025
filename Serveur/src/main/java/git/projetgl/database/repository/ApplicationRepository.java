@@ -1,6 +1,9 @@
 package git.projetgl.database.repository;
 
+import git.projetgl.database.model.Advert;
+import git.projetgl.database.model.AppUser;
 import git.projetgl.database.model.Application;
+import git.projetgl.database.model.Status;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -35,4 +38,23 @@ public class ApplicationRepository extends AbstractRepository {
             if (application != null) session.remove(application);
         });
     }
+
+    public void createFromIds(Long userId, Long advertId) {
+        executeVoid(session -> {
+            AppUser user = session.find(AppUser.class, userId);
+            Advert advert = session.find(Advert.class, advertId);
+
+            if (user == null || advert == null) {
+                throw new IllegalArgumentException("Utilisateur ou advert introuvable");
+            }
+
+            // Création de l'application
+            Application application = new Application(advert, user);
+            application.setApplicationStatus(Status.WAITING);
+            // Persistance
+            session.persist(application);
+
+        });
+    }
+
 }

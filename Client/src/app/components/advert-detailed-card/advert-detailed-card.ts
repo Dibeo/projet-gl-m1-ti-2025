@@ -37,7 +37,8 @@ export class AdvertDetailedCard implements OnInit {
 
     this.applicationService.getAll().subscribe({
       next: (data) => {
-        const filtered = data.filter((app) => app.advertId === this.advert.id);
+        const filtered = data.filter((app) => app.advert.id === this.advert.id);
+        console.log(data);
         this.applications.set(filtered);
         this.loadingApplications.set(false);
       },

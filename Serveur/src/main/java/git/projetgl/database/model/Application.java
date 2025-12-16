@@ -1,5 +1,6 @@
 package git.projetgl.database.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import static git.projetgl.database.model.Status.WAITING;
@@ -11,6 +12,7 @@ public class Application {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private AppUser requester;

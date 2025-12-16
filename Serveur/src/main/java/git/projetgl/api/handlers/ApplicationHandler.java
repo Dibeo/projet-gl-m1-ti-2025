@@ -31,10 +31,24 @@ public class ApplicationHandler {
         }
     }
 
+    // DTO pour la création d'une application
+    public static class ApplicationDTO {
+        public Long userId;
+        public Long advertId;
+    }
+
     public void createApplication(Context ctx) {
-        Application application = ctx.bodyAsClass(Application.class);
-        Application created = applicationService.createApplication(application);
-        ctx.status(201).json(created);
+        // Lire le DTO depuis le corps de la requête
+        ApplicationDTO dto = ctx.bodyAsClass(ApplicationDTO.class);
+
+        if (dto.userId == null || dto.advertId == null) {
+            ctx.status(400).json(Map.of("error", "userId and advertId are required"));
+            return;
+        }
+
+        applicationService.createApplicationFromIds(dto.userId, dto.advertId);
+
+        ctx.status(201);
     }
 
     public void acceptApplication(Context ctx) {

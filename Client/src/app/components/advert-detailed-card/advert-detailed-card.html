@@ -22,7 +22,7 @@
 
     <ul>
       @for (app of applications(); track app.id) {
-        <li>User ID: {{ app.userId }}</li>
+        <li>Email: {{ app.applicant?.email }} - {{ app.applicant?.firstName }} {{ app.applicant?.lastName }}</li>
       } @empty {
         <li>Aucune candidature.</li>
       }

@@ -45,4 +45,8 @@ public class ApplicationService {
     public void deleteApplication(Long id) {
         repository.delete(id);
     }
+
+    public void createApplicationFromIds(Long userId, Long advertId) {
+        repository.createFromIds(userId, advertId);
+    }
 }
