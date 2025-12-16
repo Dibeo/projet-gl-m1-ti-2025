@@ -76,23 +76,30 @@ export class AdvertDetailedCard implements OnInit {
     });
   }
 
-  acceptApplication(app: Application) {
-    this.applicationService.update(app.id!, { ...app, applicationStatus: 'ACCEPTED' }).subscribe({
-      next: () => {
-        Swal.fire('✅ Accepté', `${app.applicant?.firstName} a été accepté.`, 'success');
-        this.loadApplications(); // rafraîchit la liste
-      },
-      error: (err) => Swal.fire('Erreur', 'Impossible d’accepter cette candidature.', 'error'),
-    });
-  }
+  acceptApplication(app: Application): void {
+  this.applicationService.update(app.id!, { ...app, applicationStatus: 'ACCEPTED' }).subscribe({
+    next: () => {
+      Swal.fire('✅ Accepté', 'La candidature a été acceptée.', 'success');
+      this.loadApplications(); // rafraîchit la liste
+    },
+    error: (err) => {
+      console.error('Erreur acceptation', err);
+      Swal.fire('❌ Erreur', 'Impossible d’accepter la candidature.', 'error');
+    },
+  });
+}
 
-  rejectApplication(app: Application) {
-    this.applicationService.update(app.id!, { ...app, applicationStatus: 'REJECTED' }).subscribe({
-      next: () => {
-        Swal.fire('❌ Refusé', `${app.applicant?.firstName} a été refusé.`, 'info');
-        this.loadApplications(); // rafraîchit la liste
-      },
-      error: (err) => Swal.fire('Erreur', 'Impossible de refuser cette candidature.', 'error'),
-    });
-  }
+rejectApplication(app: Application): void {
+  this.applicationService.update(app.id!, { ...app, applicationStatus: 'REJECTED' }).subscribe({
+    next: () => {
+      Swal.fire('✅ Refusé', 'La candidature a été refusée.', 'success');
+      this.loadApplications(); // rafraîchit la liste
+    },
+    error: (err) => {
+      console.error('Erreur refus', err);
+      Swal.fire('❌ Erreur', 'Impossible de refuser la candidature.', 'error');
+    },
+  });
+}
+
 }
