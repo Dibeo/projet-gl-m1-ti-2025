@@ -1,5 +1,7 @@
 # Application d’Échange Local
 
+[![Serveur CI - Test Junit](https://github.com/Dibeo/projet-gl-m1-ti-2025/actions/workflows/Junit-Test.yml/badge.svg)](https://github.com/Dibeo/projet-gl-m1-ti-2025/actions/workflows/Junit-Test.yml)
+
 Une plateforme permettant aux utilisateurs d’échanger des objets ou des compétences au sein d’une même communauté.
 
 ---
