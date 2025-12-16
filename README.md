@@ -1,4 +1,5 @@
 # Application d’Échange Local
+Simon F.
 
 [![Serveur CI - Test Junit](https://github.com/Dibeo/projet-gl-m1-ti-2025/actions/workflows/Junit-Test.yml/badge.svg)](https://github.com/Dibeo/projet-gl-m1-ti-2025/actions/workflows/Junit-Test.yml)
 
