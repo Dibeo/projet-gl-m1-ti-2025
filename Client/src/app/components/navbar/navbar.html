@@ -21,14 +21,14 @@
 
     <div class="nav-sections">
 
-      @if (connected) {
+      @if (connected()) {
         <a href="/dashboard" class="nav-btn-dashboard">
           <img src="icons/manage_icon.svg" alt="Dashboard Icon" />
         </a>
       }
 
-      <a href="/login" class="dropbtn" onClick={handleUserButton}>
-        <img [src]="userIcon" alt="User Icon" />
+      <a href="/login" class="dropbtn" (click)=handleUserButton()>
+        <img [src]="userIcon()" alt="User Icon" />
       </a>
     </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, signal } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
@@ -9,13 +9,14 @@ import { Router } from '@angular/router';
 })
 export class Navbar implements OnInit {
   isScrolled = false;
-  connected: boolean = false;
-  userIcon: string = 'icons/user_icon.svg'; // icone par défaut
+  connected = signal(false);
+  userIcon = signal('icons/user_icon.svg');
 
-  constructor(private cookieService: CookieService, private router: Router) { }
+  constructor(private cookieService: CookieService, private router: Router) {}
 
   ngOnInit(): void {
     this.checkConnection();
+    console.log(this.connected());
   }
 
   @HostListener('window:scroll', [])
@@ -26,22 +27,21 @@ export class Navbar implements OnInit {
   checkConnection() {
     const user = this.cookieService.get('connected_user');
     if (user) {
-      this.connected = true;
-      this.userIcon = 'icons/logout_icon.svg';
+      this.connected.set(true);
+      this.userIcon.set('icons/logout_icon.svg');
     } else {
-      this.connected = false;
-      this.userIcon = 'icons/user_icon.svg';
+      this.connected.set(false);
+      this.userIcon.set('icons/user_icon.svg');
     }
   }
 
   handleUserButton() {
-    if (this.connected) {
+    if (this.connected()) {
       // Déconnexion
       this.cookieService.delete('connected_user', '/');
-      this.connected = false;
-      this.userIcon = 'icons/user_icon.svg';
+      this.connected.set(false);
+      this.userIcon.set('icons/user_icon.svg');
     } else {
-      // Redirection vers la page de connexion
       this.router.navigate(['/login']);
     }
   }
