@@ -40,7 +40,6 @@ export class AdvertCard implements OnInit {
         title: 'Erreur',
         text: 'Vous devez être connecté pour proposer.',
       });
-      openPaywall();
       return;
     }
 
