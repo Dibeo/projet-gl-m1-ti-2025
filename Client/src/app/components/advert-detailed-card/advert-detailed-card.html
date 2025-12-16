@@ -22,7 +22,15 @@
 
     <ul>
       @for (app of applications(); track app.id) {
-        <li>Email: {{ app.applicant?.email }} - {{ app.applicant?.firstName }} {{ app.applicant?.lastName }}</li>
+        <li>
+          {{ app.applicant?.firstName }} {{ app.applicant?.lastName }} ({{ app.applicant?.email }})
+          <button class="accept-btn" (click)="acceptApplication(app)">
+            <img src="icons/validate_icon.svg" alt="Valider" />
+          </button>
+          <button class="reject-btn" (click)="rejectApplication(app)">
+            <img src="icons/cancel_icon.svg" alt="Refuser" />
+          </button>
+        </li>
       } @empty {
         <li>Aucune candidature.</li>
       }

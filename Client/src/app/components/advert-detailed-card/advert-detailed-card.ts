@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
 import { Advert, AdvertService } from '../../core/services/advert.service';
 import { Application, ApplicationService } from '../../core/services/application.service';
-import { AppUser, AppUserService } from '../../core/services/app-user.service';
+import { AppUserService } from '../../core/services/app-user.service';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 
@@ -19,8 +19,6 @@ export class AdvertDetailedCard implements OnInit {
   loadingApplications = signal(false);
   error = signal('');
 
-  statusOptions = ['WAITING', 'ACCEPTED', 'REJECTED'];
-
   constructor(
     private applicationService: ApplicationService,
     private advertService: AdvertService,
@@ -37,8 +35,9 @@ export class AdvertDetailedCard implements OnInit {
 
     this.applicationService.getAll().subscribe({
       next: (data) => {
-        const filtered = data.filter((app) => app.advert.id === this.advert.id);
-        console.log(data);
+        const filtered = data
+          .filter((app) => app.advert.id === this.advert.id)
+          .map(app => ({ ...app, applicant: app.applicant })); // Convert requester -> applicant
         this.applications.set(filtered);
         this.loadingApplications.set(false);
       },
@@ -70,33 +69,30 @@ export class AdvertDetailedCard implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.advertService.delete(advertId).subscribe({
-          next: () => {
-            Swal.fire('Supprimé !', "L'advert a été supprimé.", 'success');
-          },
-          error: (err) => {
-            console.error(err);
-            Swal.fire('Erreur', 'Impossible de supprimer cet advert.', 'error');
-          },
+          next: () => Swal.fire('Supprimé !', "L'advert a été supprimé.", 'success'),
+          error: (err) => Swal.fire('Erreur', 'Impossible de supprimer cet advert.', 'error'),
         });
       }
     });
   }
 
-  /*acceptApplication(app: Application): void {
-    this.applicationService.update(app.id!, { ...app, status: 'ACCEPTED' }).subscribe({
+  acceptApplication(app: Application) {
+    this.applicationService.update(app.id!, { ...app, applicationStatus: 'ACCEPTED' }).subscribe({
       next: () => {
+        Swal.fire('✅ Accepté', `${app.applicant?.firstName} a été accepté.`, 'success');
         this.loadApplications(); // rafraîchit la liste
       },
-      error: (err) => console.error('Erreur acceptation', err),
+      error: (err) => Swal.fire('Erreur', 'Impossible d’accepter cette candidature.', 'error'),
     });
   }
 
-  rejectApplication(app: Application): void {
-    this.applicationService.update(app.id!, { ...app, status: 'REJECTED' }).subscribe({
+  rejectApplication(app: Application) {
+    this.applicationService.update(app.id!, { ...app, applicationStatus: 'REJECTED' }).subscribe({
       next: () => {
+        Swal.fire('❌ Refusé', `${app.applicant?.firstName} a été refusé.`, 'info');
         this.loadApplications(); // rafraîchit la liste
       },
-      error: (err) => console.error('Erreur refus', err),
+      error: (err) => Swal.fire('Erreur', 'Impossible de refuser cette candidature.', 'error'),
     });
-  }*/
+  }
 }
