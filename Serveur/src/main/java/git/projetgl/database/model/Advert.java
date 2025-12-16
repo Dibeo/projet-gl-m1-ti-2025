@@ -14,7 +14,7 @@ public class Advert {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(name = "desc", nullable = false)
     private String description;
 
     @Enumerated(EnumType.STRING)

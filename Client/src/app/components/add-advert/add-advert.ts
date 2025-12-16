@@ -5,6 +5,7 @@ import { AppUser } from '../../core/services/app-user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { openPaywall } from '../../core/services/payload.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-advert',
@@ -58,24 +59,53 @@ export class AddAdvert {
   }
 
   createAdvert(): void {
-    if (!this.newAdvert.title || !this.newAdvert.desc) return;
-
-    this.advertService.create(this.newAdvert).subscribe({
-      next: () => {
-        this.newAdvert = {
-          title: '',
-          desc: '',
-          publisher: { id: this.connectedUser.id } as AppUser,
-          advertType: 'OTHER',
-        };
-        this.loadUserAdverts();
-      },
-      error: (err) => {
-        console.error(err);
-        this.errorMessage.set('Erreur lors de la création de l’annonce');
-      },
+  if (!this.newAdvert.title || !this.newAdvert.desc) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Champs manquants',
+      text: 'Veuillez remplir le titre et la description',
     });
+    return;
   }
+
+  this.loading.set(true);
+
+  this.advertService.create(this.newAdvert).subscribe({
+    next: () => {
+      this.loading.set(false);
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Succès 🎉',
+        text: 'Annonce ajoutée avec succès',
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
+      this.newAdvert = {
+        title: '',
+        desc: '',
+        publisher: { id: this.connectedUser.id } as AppUser,
+        advertType: 'OTHER',
+      };
+
+      this.loadUserAdverts();
+    },
+    error: (err) => {
+      console.error(err);
+      this.loading.set(false);
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur ❌',
+        text: 'Échec de la création de l’annonce',
+      });
+
+      this.errorMessage.set('Erreur lors de la création de l’annonce');
+    },
+  });
+}
+
 
   onApplyClick() {
     openPaywall();
